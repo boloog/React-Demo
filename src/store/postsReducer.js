@@ -1,11 +1,19 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import { CHANGE_INPUT, CHANGE_BTN, DELETE_ITEM, GET_LIST } from './actionTypes';
 
-import { CHANGE_INPUT, CHANGE_BTN, DELETE_ITEM } from './actionTypes';
+// 增强函数 中间件
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+  : compose;
+
+const enhancer = composeEnhancers(applyMiddleware(thunk));
+// 以上 增强函数 中间件
 
 const defaultState = {
   placeholder: '请输入内容',
   inputValue: '',
-  list: ['React-Redux学习']
+  list: []
 };
 
 const postsReducer = (state = defaultState, action) => {
@@ -24,6 +32,9 @@ const postsReducer = (state = defaultState, action) => {
     case DELETE_ITEM:
       state.list.splice(action.index, 1);
       return state;
+    case GET_LIST:
+      state.list = action.data.map(item => item.title);
+      return state;
     default:
       return state;
   }
@@ -31,7 +42,8 @@ const postsReducer = (state = defaultState, action) => {
 
 const store = createStore(
   postsReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  enhancer
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 export default store;

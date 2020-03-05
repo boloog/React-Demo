@@ -1,12 +1,17 @@
-## redux 小技巧
+## redux-thunk 中间件
 
-- 把类型写成一个文件，用常亮表示，方便复用 `actionTypes.js`
-- 把 `action` 写在一个文件，方便查看 `actionFactory.js`
-- `combineReducers` 把一个由多个不同 `reducer` 函数作为 `value` 的 `object`，合并成一个最终的 `reducer` 函数，然后就可以对这个 `reducer` 调用 `createStore`
-- `Provider` Provider 组件，可以让容器组件拿到 state `Todo.js`
-- `connect` 用于从 UI 组件生成容器组件。connect 的意思，就是将这两种组件连起来 `Posts.js` 无状态组件
+- 无状态组件编写，负责 UI 部分
 
-## 两个小增删改
+## 豆瓣 API `https://api.douban.com/v2/movie/`
 
-- `Todo.js`
-- `TodoList.js`
+- 获取正在热映的电影 `in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&city=成都&start=0&count=10`
+- 即将上映 `coming_soon`
+- 获取电影 Top250 `top250?start=0&count=10`
+- 电影搜索 `search?q=关键字&start=0&count=10` `search?tag=标签&start=0&count=10`
+- 电影详情 `subject/:id`
+- 口碑榜 `weekly`
+- 北美票房 `us_box`
+- 电影新片 `new_movies`
+- 电影剧照 `subject/26942674/photos`
+- 电影短评/长评 `subject/26942674/comments` `reviews`
+- 电影人作品 `celebrity/1044707/works`
