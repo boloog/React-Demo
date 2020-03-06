@@ -8,31 +8,60 @@ import DianNao from './Pages/DianNao';
 import './index.css';
 
 export default function AppRouter() {
+  // 动态权限菜单
+  let routeConfig = [
+    {
+      path: '/',
+      title: '首页',
+      exact: true,
+      component: Index
+    },
+    {
+      path: '/jiadian',
+      title: '家用电器',
+      exact: false,
+      component: JiaDian
+    },
+    {
+      path: '/shouji',
+      title: '手机数码',
+      exact: false,
+      component: ShouJi
+    },
+    {
+      path: '/diannao',
+      title: '电脑办工',
+      exact: false,
+      component: DianNao
+    }
+  ];
+
   return (
     <Router>
       <div className="root-wrap">
         <div className="left-nav">
           <h3>一级导航</h3>
           <ul>
-            <li>
-              <Link to="/">首页</Link>
-            </li>
-            <li>
-              <Link to="/jiadian/">家用电器</Link>
-            </li>
-            <li>
-              <Link to="/shouji/">手机数码</Link>
-            </li>
-            <li>
-              <Link to="/diannao/">电脑办工</Link>
-            </li>
+            {routeConfig.map(item => {
+              return (
+                <li key={item.title}>
+                  <Link to={item.path}>{item.title}</Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div className="right-main">
-          <Route path="/" exact component={Index} />
-          <Route path="/jiadian/" component={JiaDian} />
-          <Route path="/shouji/" component={ShouJi} />
-          <Route path="/diannao/" component={DianNao} />
+          {routeConfig.map(item => {
+            return (
+              <Route
+                key={item.title}
+                path={item.path}
+                exact={item.exact}
+                component={item.component}
+              />
+            );
+          })}
         </div>
       </div>
     </Router>
