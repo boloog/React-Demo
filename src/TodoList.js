@@ -4,7 +4,7 @@ import {
   changeInputAction,
   changeBtnAction,
   deleteItemAction,
-  getTodoList
+  getMyTodoList
 } from './store/actionFactory';
 import store from './store/postsReducer';
 import TodoListUI from './TodoListUI';
@@ -23,7 +23,7 @@ class TodoList extends Component {
   }
   componentDidMount() {
     // 获取 远程数据  调用 中间件的 方法
-    const action = getTodoList();
+    const action = getMyTodoList();
     store.dispatch(action);
 
     // 以下接口写在Factory里面

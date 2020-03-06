@@ -1,5 +1,11 @@
 // 把 action  写成一个文件
-import { CHANGE_INPUT, CHANGE_BTN, DELETE_ITEM, GET_LIST } from './actionTypes';
+import {
+  CHANGE_INPUT,
+  CHANGE_BTN,
+  DELETE_ITEM,
+  GET_LIST,
+  GET_MY_LIST
+} from './actionTypes';
 import axios from 'axios';
 
 export const changeInputAction = value => ({
@@ -22,7 +28,7 @@ export const getListAction = data => ({
   data
 });
 
-// 调用接口
+// 调用接口 thunk
 export const getTodoList = () => {
   return dispatch => {
     axios
@@ -37,3 +43,8 @@ export const getTodoList = () => {
       });
   };
 };
+
+// 调用接口 saga
+export const getMyTodoList = () => ({
+  type: GET_MY_LIST
+});

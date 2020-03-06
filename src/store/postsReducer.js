@@ -1,13 +1,19 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+// import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
+import mySagas from './sagas';
+
 import { CHANGE_INPUT, CHANGE_BTN, DELETE_ITEM, GET_LIST } from './actionTypes';
+
+const sagaMiddleware = createSagaMiddleware();
 
 // 增强函数 中间件
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
   : compose;
 
-const enhancer = composeEnhancers(applyMiddleware(thunk));
+// const enhancer = composeEnhancers(applyMiddleware(thunk));
+const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware));
 // 以上 增强函数 中间件
 
 const defaultState = {
@@ -45,5 +51,8 @@ const store = createStore(
   enhancer
   // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+// 运行saga
+sagaMiddleware.run(mySagas);
 
 export default store;
