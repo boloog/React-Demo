@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0
+}
+
+li {
+  list-style: none;
+}
+
+.root-wrap {
+  display: flex;
+  height: 100vh;
+}
+
+.left-nav {
+  width: 260px;
+  padding: 20px;
+  background-color: #ccc;
+  font-size: 24px;
+
+}
+
+.right-main {
+  flex: 1;
+  background-color: #000;
+  color: #fff;
+  font-size: 20px;
+}
+
+.right-main a {
+  color: #fff;
+}
+
+.top-nav {
+  height: 80px;
+  line-height: 80px;
+  padding-left: 20px;
+  background-color: cadetblue;
+}
+
+.top-nav ul>li {
+  float: left;
+  margin-right: 10px;
+}
+
+.content {
+  padding: 20px;
+}
